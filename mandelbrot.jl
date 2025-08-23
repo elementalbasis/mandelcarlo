@@ -3,9 +3,7 @@ function iterate(z, c)
 end
 
 function is_mandelbrot(c, threshold)
-	if is_cardioid(c)
-		return true
-	elseif is_bulb(c)
+	if is_cardioid(c) || is_bulb(c)
 		return true
 	end
 
@@ -26,19 +24,12 @@ function is_cardioid(c)
 	r = abs(s)
 	x = real(s)
 
-	if 2 * r^2 < r - x
-		return true
-	else
-		return false
-	end
+	return (2 * r^2 < r - x)
 end
 
 function is_bulb(c)
 	s = c + 1
 	r = abs(s)
-	if r < 1/4
-		return true
-	else
-		return false
-	end
+	
+	return (r < 1/4)
 end
