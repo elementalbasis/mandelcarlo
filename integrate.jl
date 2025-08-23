@@ -13,6 +13,10 @@ using Measurements
 
 #MAX_RECURSION = 8
 
+# Returns a sub-box of the given `box` based on the string `s`, which can look
+# something like "1241". This string defines the quadrants of the
+# successive sub-boxes; e.g. the 1st quadrant of the 2nd quadrant of the 4th
+# quadrant of the 1st quadrant of the original box.
 function get_sub_box(box, s)
 	xmin, xmax, ymin, ymax = box
 
@@ -44,6 +48,7 @@ function get_sub_box(box, s)
 	return get_sub_box(box_new, s_new)
 end
 
+# Determines whether a given complex number `c` lies within the given box.
 function is_inside_box(c, box)
 	xmin, xmax, ymin, ymax = box
 	a = real(c)
@@ -60,6 +65,12 @@ function filter(sample_points, box)
 end
 =#
 
+# Integrates the subset of the Mandelbrot set determined by the given `box`. The
+# number of points used is determined by `sample_size`. The number of Mandelbrot
+# iterations is determined by `threshold`.
+#
+# The number of threads used by this function can be determined from the command
+# line by using the `julia -p $n` option.
 function integrate(threshold, box, sample_size)
 	xmin, xmax, ymin, ymax = box
 
