@@ -3,10 +3,10 @@ using Printf
 using ProgressMeter
 using Measurements
 #addprocs(2, exeflags="--project=$(Base.active_project())")
-#addprocs(6)
+#addprocs(4)
 
-#@everywhere using Distributions
-#@everywhere include("mandelbrot.jl")
+@everywhere using Distributions
+@everywhere include("mandelbrot.jl")
 
 #MAX_SAMPLE_SIZE = 50000
 #MAX_STRATIFIED_SAMPLING_RECURSION = 6
@@ -60,7 +60,6 @@ function filter(sample_points, box)
 end
 =#
 
-#=
 function integrate(threshold, box, sample_size)
 	xmin, xmax, ymin, ymax = box
 
@@ -82,7 +81,6 @@ function integrate(threshold, box, sample_size)
 
 	return [A_I, u_A_I]
 end
-=#
 
 #=
 function probe_structure(threshold, box, sample_size,
