@@ -1,6 +1,6 @@
 using Distributed
-using Printf
-using ProgressMeter
+#using Printf
+#using ProgressMeter
 using Measurements
 #addprocs(2, exeflags="--project=$(Base.active_project())")
 #addprocs(4)
@@ -90,7 +90,7 @@ function integrate(threshold, box, sample_size)
 	A_I = q * A_T
 	u_A_I = u_q * A_T
 
-	return [A_I, u_A_I]
+	return [A_I, u_A_I, q]
 end
 
 #=
@@ -120,8 +120,8 @@ end
 
 function stratified_sampling(threshold, box, sub_box_address, sample_size,
 		target_uncertainty)
-	A, u_A = integrate(threshold, box, sample_size)
-	println(join([sub_box_address, A, u_A], '\t'))
+	A, u_A, q = integrate(threshold, box, sample_size)
+	println(join([sample_size, sub_box_address, A, u_A, q], '\t'))
 
 	if u_A < target_uncertainty
 		return [A, u_A]

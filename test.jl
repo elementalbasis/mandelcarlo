@@ -1,8 +1,8 @@
 include("integrate.jl")
 
-threshold = 10000
+threshold = 1
 sample_size = 1000000
-target_uncertainty = 0.0001
+target_uncertainty = 0.000001
 xmin = -2
 xmax = 2
 ymin = -2
