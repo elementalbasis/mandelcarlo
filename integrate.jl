@@ -118,9 +118,10 @@ function probe_structure(threshold, box, sample_size,
 end
 =#
 
-#=
-function stratified_sampling(threshold, box, sample_size, target_uncertainty)
+function stratified_sampling(threshold, box, sub_box_address, sample_size,
+		target_uncertainty)
 	A, u_A = integrate(threshold, box, sample_size)
+	println(join([sub_box_address, A, u_A], '\t'))
 
 	if u_A < target_uncertainty
 		return [A, u_A]
@@ -128,8 +129,10 @@ function stratified_sampling(threshold, box, sample_size, target_uncertainty)
 
 	sum = 0
 	for s in ["1", "2", "3", "4"]
-		new_box = sub_box(box, s)
+		new_sub_box_address = sub_box_address * s
+		new_box = get_sub_box(box, s)
 		new_A, new_u_A = stratified_sampling(threshold, new_box,
+						     new_sub_box_address,
 						     sample_size,
 						     target_uncertainty/2)
 		sum += measurement(new_A, new_u_A)
@@ -140,7 +143,6 @@ function stratified_sampling(threshold, box, sample_size, target_uncertainty)
 
 	return [new_A, new_u_A]
 end
-=#
 
 #define X_MIN (-2)
 #define X_MAX (0.58)
