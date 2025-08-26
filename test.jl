@@ -33,5 +33,13 @@ run_id = uuid4() #string(rand(UInt128), base=16, pad=32)
 
 A, u_A = stratified_sampling(threshold, box, sub_box_address, sample_size, target_uncertainty, run_id)
 
-println("A = ", A)
-println("u(A) = ", u_A)
+
+println(join([run_id,
+	      "M" * string(threshold),
+	      "N" * string(sample_size),
+	      "U" * string(target_uncertainty),
+	      "TOTAL",
+	      A, u_A, A/(xmax-xmin)/(ymax-ymin)], '\t'))
+
+#println("A = ", A)
+#println("u(A) = ", u_A)

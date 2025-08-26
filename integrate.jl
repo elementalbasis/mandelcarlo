@@ -124,6 +124,7 @@ function stratified_sampling(threshold, box, sub_box_address, sample_size,
 	println(join([run_id,
 		      "M" * string(threshold),
 		      "N" * string(sample_size),
+		      "U" * string(target_uncertainty),
 		      "Q" * string(sub_box_address),
 		      A, u_A, q], '\t'))
 
