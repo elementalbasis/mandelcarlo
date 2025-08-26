@@ -119,9 +119,13 @@ end
 =#
 
 function stratified_sampling(threshold, box, sub_box_address, sample_size,
-		target_uncertainty)
+		target_uncertainty, run_id)
 	A, u_A, q = integrate(threshold, box, sample_size)
-	println(join([sample_size, sub_box_address, A, u_A, q], '\t'))
+	println(join([run_id,
+		      "M" * string(threshold),
+		      "N" * string(sample_size),
+		      "Q" * string(sub_box_address),
+		      A, u_A, q], '\t'))
 
 	if u_A < target_uncertainty
 		return [A, u_A]
@@ -134,7 +138,8 @@ function stratified_sampling(threshold, box, sub_box_address, sample_size,
 		new_A, new_u_A = stratified_sampling(threshold, new_box,
 						     new_sub_box_address,
 						     sample_size,
-						     target_uncertainty/2)
+						     target_uncertainty/2,
+						     run_id)
 		sum += measurement(new_A, new_u_A)
 	end
 
