@@ -2,6 +2,7 @@ import Pkg
 
 packages = [
 	    "Distributed",
+	    "Distributions",
 	    "Measurements",
 	    "ArgParse",
 	    "UUIDs",
